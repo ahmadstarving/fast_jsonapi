@@ -124,6 +124,7 @@ module FastJsonapi
         subclass.cached = cached
         subclass.set_type(subclass.reflected_record_type) if subclass.reflected_record_type
         subclass.meta_to_serialize = meta_to_serialize
+        subclass.cache_instance = cache_instance
       end
 
       def reflected_record_type
@@ -178,6 +179,7 @@ module FastJsonapi
         self.cached = cache_options[:enabled] || false
         self.cache_length = cache_options[:cache_length] || 5.minutes
         self.race_condition_ttl = cache_options[:race_condition_ttl] || 5.seconds
+        self.cache_instance = cache_instance[:cache_instance]
       end
 
       def attributes(*attributes_list, &block)
